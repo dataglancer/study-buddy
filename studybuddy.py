@@ -30,7 +30,7 @@ def quiz(terms):
         random.shuffle(options)
 
         # display question
-        print(f"\nTerm: {term}")
+        print(f"\nTerm:\n {term}\n")
         for i, opt in enumerate(options, 1):
             print(f"  {i}. {opt}")
 
@@ -45,9 +45,9 @@ def quiz(terms):
         total += 1
         if options[idx] == true_def:
             correct += 1
-            print("Correct!")
+            print("Correct!\n")
         else:
-            print(f"WRONG, correct answer: {true_def}")
+            print(f"WRONG, correct answer: {true_def}\n")
 
         # show current grade
         pct = correct / total * 100
