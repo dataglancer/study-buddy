@@ -36,11 +36,11 @@ def quiz(terms):
 
         # get answer
         while True:
-            choice = input("Your answer (1-4): ").strip()
+            choice = input("\nYour answer (1-4): ").strip()
             if choice in ('1','2','3','4'):
                 idx = int(choice) - 1
                 break
-            print("Please enter a number between 1 and 4.")
+            print("\nPlease enter a number between 1 and 4.\n")
 
         total += 1
         if options[idx] == true_def:
