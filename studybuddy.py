@@ -3,6 +3,9 @@ import csv
 import random
 import argparse
 import sys
+from colorama import init, Fore, Style
+
+init(autoreset=True)
 
 def load_terms(csv_path):
     """Load terms and definitions from a two-column CSV."""
@@ -30,7 +33,7 @@ def quiz(terms):
         random.shuffle(options)
 
         # display question
-        print(f"\nTerm:\n {term}\n")
+        print(f"\nTerm:\n{Style.BRIGHT}{Fore.CYAN} {term}{Style.RESET_ALL}\n")
         for i, opt in enumerate(options, 1):
             print(f"  {i}. {opt}")
 
@@ -45,9 +48,9 @@ def quiz(terms):
         total += 1
         if options[idx] == true_def:
             correct += 1
-            print("Correct!\n")
+            print(f"\n{Style.BRIGHT}{Fore.GREEN}Correct!{Style.RESET_ALL}\n")
         else:
-            print(f"WRONG, correct answer: {true_def}\n")
+            print(f"{Style.BRIGHT}{Fore.RED}\nWRONG!{Style.RESET_ALL} Correct answer: {true_def}\n")
 
         # show current grade
         pct = correct / total * 100
