@@ -15,7 +15,9 @@ The terms and results use terminal color package 'colorama', you might need to i
 2. `./study_buddy.py path/to/terms.csv`
 
 ## CSV format
-Standard CSV format. No headers. Example:
+Standard UTF-8 CSV format. No headers. 
+
+Example:
 
 Term, Definition 
 
