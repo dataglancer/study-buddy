@@ -5,6 +5,7 @@ import argparse
 import sys
 from colorama import init, Fore, Style
 
+# Initialize colorama for colored terminal output
 init(autoreset=True)
 
 def load_terms(csv_path):
@@ -20,6 +21,7 @@ def load_terms(csv_path):
         sys.exit("Need at least 4 term-definition pairs to generate options.")
     return terms
 
+
 def quiz(terms):
     """Run the quiz: present each term once in random order."""
     random.shuffle(terms)
@@ -33,7 +35,7 @@ def quiz(terms):
         random.shuffle(options)
 
         # display question
-        print(f"\nTerm:\n{Style.BRIGHT}{Fore.CYAN} {term}{Style.RESET_ALL}\n")
+        print(f"\nTerm:\n{Style.BRIGHT}{Fore.CYAN}{term}{Style.RESET_ALL}\n")
         for i, opt in enumerate(options, 1):
             print(f"  {i}. {opt}")
 
@@ -61,9 +63,23 @@ def quiz(terms):
     final_pct = correct / total * 100
     print(f"Final score: {correct}/{total} ({final_pct:.2f}%)")
 
+
+def flashcards(terms):
+    """Run flashcard mode: show term, wait for key, then definition."""
+    random.shuffle(terms)
+    for term, definition in terms:
+        # show term
+        print(f"\nTerm:\n{Style.BRIGHT}{Fore.CYAN}{term}{Style.RESET_ALL}\n")
+        input("Press Enter to see definition...")
+        # show definition
+        print(f"\nDefinition: {Style.BRIGHT}{Fore.GREEN}{definition}{Style.RESET_ALL}\n")
+        input("Press Enter to continue...")
+    print("\nFlashcards complete!")
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Study Buddy: multiple-choice quiz on term/definitions CSV"
+        description="Study Buddy: multiple-choice quiz or flashcards on term/definitions CSV"
     )
     parser.add_argument(
         'csvfile',
@@ -72,8 +88,21 @@ def main():
     args = parser.parse_args()
 
     terms = load_terms(args.csvfile)
-    quiz(terms)
+
+    # mode selection
+    print("Select mode:")
+    print("  1) Quiz mode")
+    print("  2) Flashcard mode")
+    while True:
+        mode = input("Enter 1 or 2: ").strip()
+        if mode in ('1','2'):
+            break
+        print("Please enter 1 or 2.")
+
+    if mode == '1':
+        quiz(terms)
+    else:
+        flashcards(terms)
 
 if __name__ == '__main__':
     main()
-
